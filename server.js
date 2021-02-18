@@ -31,7 +31,7 @@ router.post('/message', function (req, res) {
   // Enviar mensaje en formato query
   console.log(req.query);
   if (req.query.error === "ok") {
-    response.error(req, res, 'Error simulado', 400 ); 
+    response.error(req, res, 'Error inesperado', 500, 'Es solo una simulación de los errores' ); 
   } else {
     // res.send('Mensaje ' + req.body.text + ' añadido correctamente');
     response.success(req, res, 'Añadido correctamente', 201 );
