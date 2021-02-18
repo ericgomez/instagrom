@@ -26,7 +26,10 @@ router.post('/message', function (req, res) {
 });
 
 router.delete('/message', function (req, res) {
-  res.send('Mensaje eliminado');
+  // res.send('Mensaje eliminado');
+  /*****    Status: 201     ******/
+  // res.status(201).send( { error: '', body: 'Eliminado Correctamente' } ); // Enviar un Objeto en respuesta
+  res.status(201).send( [ { error: '', body: 'Eliminado Correctamente' } ] ); // Enviar un Array en respuesta
 });
 
 // app.use('/', function (req, res) {
