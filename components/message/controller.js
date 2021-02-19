@@ -2,13 +2,15 @@ const store = require('./store')
 
 // Todos los metodos: add, list, updateText, remove vienen desde el 'store' ->
 
-function addMessage(user, message) {
+
+function addMessage(chat, user, message) {
   return new Promise((resolve, reject) => { 
-    if (!user || !message) {
+    if (!chat || !user || !message) {
       console.error('[messageController] No hay usuario o mensaje');
       return reject('Los datos son incorrectos');
     }
     const fullMessage = {
+      chat,
       user,
       message,
       date: new Date()

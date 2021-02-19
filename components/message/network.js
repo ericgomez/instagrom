@@ -24,7 +24,7 @@ router.get('/', function (req, res) {
 // Metodo para registrar
 router.post('/', function (req, res) {
 
-  controller.addMessage(req.body.user, req.body.message)
+  controller.addMessage(req.body.chat, req.body.user, req.body.message)
     .then((fullMessage) => {
       response.success(req, res, fullMessage, 201 );
     })
