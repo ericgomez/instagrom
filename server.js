@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const server = require('http').Server(app);
 
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const socket = require('./socket');
 const db = require('./db')
@@ -13,6 +14,8 @@ db('mongodb+srv://user_chat:RgAzkuF0R27DJ94L@cluster0.tmnrd.mongodb.net/telegrom
 req = request
 res = response
  */
+
+app.use(cors());
 
 // Enviar mensaje en formato .json
 app.use(bodyParser.json());
