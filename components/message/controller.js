@@ -1,5 +1,7 @@
 const store = require('./store')
 
+// Todos los metodos: add, list, updateText, remove vienen desde el 'store' ->
+
 function addMessage(user, message) {
   return new Promise((resolve, reject) => { 
     if (!user || !message) {
@@ -36,8 +38,27 @@ function updateMessage(id, message) {
   });
 }
 
+function deleteMessage(id) {
+  return new Promise((resolve, reject) => {
+    if (!id) {
+      reject('Id incorrecto');
+      return false;
+    }
+
+   store.remove(id)
+    .then(() => {
+      resolve();
+    })
+    .catch(e => {
+      reject(e)
+    })
+
+  });
+}
+
 module.exports = {
   addMessage,
   getMessage,
   updateMessage,
+  deleteMessage,
 };

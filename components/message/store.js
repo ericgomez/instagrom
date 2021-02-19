@@ -18,7 +18,7 @@ function addMessage(message) {
 
 async function getMessage(filterUser) {
   let filter = {};
-  
+
   if (filterUser !== null) {
     filter = { user: filterUser };
   }
@@ -40,9 +40,16 @@ async function updateText(id, message) {
 
 }
 
+function removeMessage(id) {
+  return Model.deleteOne({
+    _id: id
+  });
+}
+
 module.exports = {
+/*Nombre controller - Nombre store */
   add: addMessage,
   list: getMessage,
   updateText: updateText,
-  //delete
+  remove: removeMessage,
 }

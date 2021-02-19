@@ -5,6 +5,9 @@ const controller = require('./controller');
 
 const router = express.Router();
 
+// Todos los metodos: addMessage, getMessage, updateMessage, deleteMessage vienen desde el 'controller' ->
+
+// Metodo para consultar 
 router.get('/', function (req, res) {
   const filterMessages = req.query.user || null;
 
@@ -18,6 +21,7 @@ router.get('/', function (req, res) {
     
 });
 
+// Metodo para registrar
 router.post('/', function (req, res) {
 
   controller.addMessage(req.body.user, req.body.message)
@@ -30,6 +34,7 @@ router.post('/', function (req, res) {
 
 });
 
+// Metodo para modificar
 router.patch('/:id', function (req, res) {
 
   controller.updateMessage(req.params.id, req.body.message)
@@ -42,15 +47,16 @@ router.patch('/:id', function (req, res) {
 
 });
 
-router.delete('/', function (req, res) {
-  // res.send('Mensaje eliminado');
-  /*****    Status: 201     ******/
-  // res.status(201).send( { error: '', body: 'Eliminado Correctamente' } ); // Enviar un Objeto en respuesta
-  res.status(201).send( [ { error: '', body: 'Eliminado Correctamente' } ] ); // Enviar un Array en respuesta
+// Metodo para eliminar
+router.delete('/:id', function (req, res) {
+  controller.deleteMessage(req.params.id)
+    .then(() => {
+      response.success(req, res, `Id ${req.params.id} eliminado`, 200 );
+    })
+    .catch( e => {
+      response.error(req, res, 'Error interno', 500, e );
+    });
 });
 
-// app.use('/', function (req, res) {
-//   res.send('Hola');
-// });
 
 module.exports = router;
