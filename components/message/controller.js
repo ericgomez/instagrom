@@ -1,4 +1,5 @@
 const store = require('./store')
+const { socket } = require('../../socket');
 
 // Todos los metodos: add, list, updateText, remove vienen desde el 'store' ->
 
@@ -24,6 +25,9 @@ function addMessage(chat, user, message, file) {
     };
   
     store.add(fullMessage);
+
+    socket.io.emit('message', fullMessage);
+
     resolve(fullMessage);
   });
 }
