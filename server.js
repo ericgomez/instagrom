@@ -2,13 +2,15 @@ const express = require('express');
 const app = express();
 const server = require('http').Server(app);
 
+const config = require('./config')
+
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const socket = require('./socket');
 const db = require('./db')
 const router = require('./network/routes');
 
-db('mongodb+srv://user_chat:RgAzkuF0R27DJ94L@cluster0.tmnrd.mongodb.net/telegrom?retryWrites=true&w=majority')
+db(config.dbUrl)
 
 /*  Abreviatura
 req = request
@@ -27,8 +29,8 @@ socket.connect(server);
 
 router(app);
 
-app.use('/app', express.static('public')); // Accedemos desde http://localhost:3000/app
+app.use(config.publicRoute, express.static('public')); // Accedemos desde http://localhost:3000/app
 
-server.listen(3000, function () {
-  console.log('La aplicación está escuchando en el http://localhost:3000');
+server.listen(config.port, function () {
+  console.log(`La aplicación está escuchando en el ${config.host}:${config.port}`);
 });

@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 
+const config = require('./../../config');
 const response = require('./../../network/response');
 const controller = require('./controller');
 
@@ -9,7 +10,7 @@ const router = express.Router();
 // Todos los metodos: addMessage, getMessage, updateMessage, deleteMessage vienen desde el 'controller' ->
 
 const upload = multer({
-  dest: 'public/files/',
+  dest: `public/${config.filesRoute}/`,
 })
 
 // Metodo para consultar 
